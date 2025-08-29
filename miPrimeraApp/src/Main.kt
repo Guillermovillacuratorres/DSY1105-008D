@@ -72,6 +72,16 @@ fun main() {
 
 
 
+/*
+    var uno = readLine()?.toInt()
+    var dos = readLine()?.toInt()
+
+    if(uno != null && dos != null){
+        print(uno + dos)
+    }
+  */
+
+/*
     var autoUno = Vehiculo()
     autoUno.color = "Verde"
 
@@ -79,9 +89,14 @@ fun main() {
 
     println(autoDos)
 
+*/
 
 
+    var swift = Auto(3,true,"Rojo",2020,"abcd-15","Suzuki",30);
 
+    swift.acelerar()
+
+    println(swift)
 
 
 }
