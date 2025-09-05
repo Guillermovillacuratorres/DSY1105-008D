@@ -1,6 +1,32 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import kotlinx.coroutines.*
+
 fun main() {
+
+    val scope = CoroutineScope(Dispatchers.Default)
+
+
+
+    suspend fun simularCorrutina(){
+         delay(3000)
+        println("Corrutina ejecutada!!!!")
+    }
+
+
+    println("ANTES!!!")
+    scope.launch {
+        simularCorrutina()
+        println("Dentro de la corrutina")
+    }
+    println("DESPUES")
+
+
+
+
+
+
     val autos = listOf("Nissan", "Honda", "Citroen")
     val frutas = mutableListOf("Manzana", "Platano", "Naranja", "Manzana")
 
@@ -124,5 +150,19 @@ fun main() {
 
 
 
-    
+
+    var sumaNumerosLista = numeros.sumOf { it }
+
+    println("NUMEROS SUMADOS: $sumaNumerosLista")
+
+
+
+    val mascotaBuscar = listOf(1,2,3)
+
+    mascotaBuscar.forEach { id ->
+        //val result = buscarMascota(id)
+    }
+
+
+
 }
