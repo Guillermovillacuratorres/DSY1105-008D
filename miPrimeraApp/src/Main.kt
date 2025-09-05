@@ -98,5 +98,16 @@ fun main() {
 
     println(swift)
 
+    var civic = Auto(3,false,"Negro",1999,"qwer99","Honda",55).apply {
+       patente = "123"
+        acelerar()
+    }
+
+    swift.let{
+        println(it.patente)
+    }
+
+
+
 
 }

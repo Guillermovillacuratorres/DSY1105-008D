@@ -1,4 +1,4 @@
-open class Vehiculo (val marca:String,val patente:String,val anio:Int, val color:String, var velocidad:Int){
+open class Vehiculo (val marca:String,var patente:String,val anio:Int, val color:String, var velocidad:Int){
     /*
     var marca: String = "";
     var patente:String = "";
