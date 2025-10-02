@@ -1,5 +1,6 @@
 package com.example.miprimeraapp.views.login
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -24,8 +26,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.miprimeraapp.R
 
-class LoginScreen {
+class LoginScreen(private val navController: NavHostController? = null) {
 
     @Composable
     fun login(){
@@ -43,6 +47,11 @@ class LoginScreen {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(32.dp).fillMaxWidth(),
                 textAlign = TextAlign.Center
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.honda),
+                contentDescription = "Auto"
             )
 
             TextField(
@@ -65,23 +74,19 @@ class LoginScreen {
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = {},
+                onClick = {navController?.navigate("inicio")},
                 modifier = Modifier.fillMaxWidth()
             )
             {
                 Text("Acceder")
             }
-
-
         }
-
     }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun verLogin(){
-        login()
-    }
+}
 
 
+@Preview(showBackground = true)
+@Composable
+fun verLogin(){
+    LoginScreen().login()
 }

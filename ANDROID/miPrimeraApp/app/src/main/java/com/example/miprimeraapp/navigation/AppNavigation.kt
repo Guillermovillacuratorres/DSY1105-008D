@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
+import com.example.miprimeraapp.views.inicio.InicioScreen
 import com.example.miprimeraapp.views.login.LoginScreen
 
 
@@ -19,7 +20,11 @@ fun AppNavigation(){
     )
     {
         composable("login"){
-            LoginScreen().login()
+            LoginScreen(navController).login()
+        }
+
+        composable ("inicio"){
+            InicioScreen(navController).inicio()
         }
 
 
