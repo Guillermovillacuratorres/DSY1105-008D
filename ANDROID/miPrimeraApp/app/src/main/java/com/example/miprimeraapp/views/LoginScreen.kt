@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.miprimeraapp.R
 import com.example.miprimeraapp.helper.showAlert
+import com.example.miprimeraapp.helper.showConfirm
 import com.example.miprimeraapp.viewModel.LoginViewModel
 
 
@@ -56,6 +57,18 @@ class LoginScreen(private val navController: NavHostController? = null) {
                 onDismiss = {viewModel.descartarAlerta()},
                 onConfirm = {viewModel.descartarAlerta()},
                 textoBtnConfirmar = viewModel.textoBotonAlerta
+            )
+        }
+
+        if(viewModel.mostrarConfirmar == true){
+            showConfirm(
+                titulo = viewModel.tituloConfirmar,
+                mensaje = viewModel.mensajeConfirmar,
+                textoBtnCancelar = viewModel.textoBtnCancelar,
+                textoBtnConfirmar = viewModel.textoBtnConfirmar,
+                eventoCancelar = {viewModel.btnCancelarConfirmar()},
+                eventoConfirmar = {viewModel.btnAceptarConfirmar()},
+                eventoTerminarAlerta = {viewModel.terminarConfirmar()}
             )
         }
 

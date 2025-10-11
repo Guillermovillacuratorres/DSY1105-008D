@@ -1,6 +1,7 @@
 package com.example.miprimeraapp.views
 
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -69,6 +70,9 @@ class InicioScreen(private val navController: NavHostController? = null) {
 
 
         )
+        BackHandler {  }
+
+
 
         Scaffold(
             topBar = {

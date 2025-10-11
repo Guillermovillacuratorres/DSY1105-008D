@@ -45,6 +45,33 @@ class LoginViewModel: ViewModel() {
     }
 
 
+    // VARIABLES CONFIRMAR
+    var mostrarConfirmar by mutableStateOf(false)
+        private set
+    var tituloConfirmar by mutableStateOf("")
+        private set
+    var mensajeConfirmar by mutableStateOf("")
+        private set
+    var textoBtnConfirmar by mutableStateOf("")
+        private set
+    var textoBtnCancelar by mutableStateOf("")
+        private set
+
+
+    fun btnAceptarConfirmar(){
+        mostrarConfirmar = false
+    }
+
+    fun btnCancelarConfirmar(){
+        mostrarConfirmar = false
+    }
+
+    fun terminarConfirmar(){
+        mostrarConfirmar = false
+    }
+
+
+
 
 
 
@@ -63,7 +90,13 @@ class LoginViewModel: ViewModel() {
             tituloAlerta = "Error de validación"
             mensajeALerta = "El correo y la contraseña no pueden estar vacíos."
             textoBotonAlerta = "Confrimar"
-            mostrarAlerta = true
+            //mostrarAlerta = true
+
+            tituloConfirmar = "Confirmación"
+            mensajeConfirmar = "Esta seguro que desea hacerlo?"
+            textoBtnConfirmar = "Confirmar"
+            textoBtnCancelar = "Cancelar"
+            mostrarConfirmar = true
         }else{
             //Error  --> alerta
             tituloAlerta = "Error de credenciales"
