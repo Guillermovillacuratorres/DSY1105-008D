@@ -1,19 +1,34 @@
 package com.example.miprimeraapp.views
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -73,12 +88,34 @@ class LoginScreen(private val navController: NavHostController? = null) {
         }
 
 
+        val transicionInfinita = rememberInfiniteTransition()
+
+        val offsetY by transicionInfinita.animateFloat(
+            initialValue = 0f,
+            targetValue = 20f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(
+                    durationMillis = 500,
+                    easing = FastOutSlowInEasing
+                ),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
 
 
 
+        var cambioColor by remember{ mutableStateOf(false) }
+
+        val colorFondo by animateColorAsState(
+            if(cambioColor) Color.Red else Color.Blue
+        )
 
         Column (
-            modifier = Modifier.fillMaxSize().padding(32.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(colorFondo)
+                .clickable{cambioColor = !cambioColor}
+                .padding(32.dp),
             verticalArrangement = Arrangement.Center
         )
         {
@@ -86,13 +123,17 @@ class LoginScreen(private val navController: NavHostController? = null) {
                 text = "Iniciar sesión",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(32.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(32.dp)
+                    .fillMaxWidth()
+                    .offset(y = offsetY.dp),
                 textAlign = TextAlign.Center
             )
 
             Image(
                 painter = painterResource(id = R.drawable.honda),
-                contentDescription = "Auto"
+                contentDescription = "Auto",
+                modifier = Modifier.offset(y = offsetY.dp)
             )
 
             TextField(
