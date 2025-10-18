@@ -85,8 +85,11 @@ class InicioScreen(private val navController: NavHostController? = null) {
                         }
                         DropdownMenu(expanded = expandirMenu,
                                     onDismissRequest = {expandirMenu = false}) {
-                            DropdownMenuItem(onClick = {expandirMenu = false}) {
-                                Text(text = "Opcion 1")
+                            DropdownMenuItem(onClick = {
+                                navController?.navigate("productos")
+                                expandirMenu = false
+                            }) {
+                                Text(text = "Gestionar productos")
                             }
                         }
                     },

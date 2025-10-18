@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.kapt")  //para poder importar kapt en las dependencias
 }
 
 android {
@@ -40,6 +41,12 @@ android {
 }
 
 dependencies {
+
+    //dependencias de room
+    implementation ("androidx.room:room-runtime:2.8.2")
+    kapt ("androidx.room:room-compiler:2.8.2")
+    implementation ("androidx.room:room-ktx:2.8.2")
+    //dependencias de room
 
     implementation("androidx.compose.material:material:1.4.3")
 

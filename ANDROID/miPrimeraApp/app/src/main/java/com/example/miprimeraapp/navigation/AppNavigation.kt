@@ -5,17 +5,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
+import com.example.miprimeraapp.viewModel.ProductoViewModel
 import com.example.miprimeraapp.views.InicioScreen
 import com.example.miprimeraapp.views.LoginScreen
+import com.example.miprimeraapp.views.ProductoScreen
 
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation(viewModel: ProductoViewModel){
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "login"
+        startDestination = "inicio"
     )
     {
         composable("login"){
@@ -26,6 +28,9 @@ fun AppNavigation(){
             InicioScreen(navController).inicio()
         }
 
+        composable("productos") {
+            ProductoScreen(navController, viewModel).pantallaProducto()
+        }
 
 
     }
