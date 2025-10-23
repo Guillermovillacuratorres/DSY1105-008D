@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
 import com.example.miprimeraapp.viewModel.ProductoViewModel
+import com.example.miprimeraapp.views.CamaraScreen
 import com.example.miprimeraapp.views.InicioScreen
 import com.example.miprimeraapp.views.LoginScreen
 import com.example.miprimeraapp.views.ProductoScreen
@@ -17,7 +18,7 @@ fun AppNavigation(viewModel: ProductoViewModel){
 
     NavHost(
         navController = navController,
-        startDestination = "inicio"
+        startDestination = "camara"
     )
     {
         composable("login"){
@@ -30,6 +31,10 @@ fun AppNavigation(viewModel: ProductoViewModel){
 
         composable("productos") {
             ProductoScreen(navController, viewModel).pantallaProducto()
+        }
+
+        composable ("camara"){
+            CamaraScreen(navController).camara()
         }
 
 
