@@ -10,6 +10,7 @@ import com.example.miprimeraapp.views.CamaraScreen
 import com.example.miprimeraapp.views.InicioScreen
 import com.example.miprimeraapp.views.LoginScreen
 import com.example.miprimeraapp.views.ProductoScreen
+import com.example.miprimeraapp.views.VibracionScreen
 
 
 @Composable
@@ -18,7 +19,7 @@ fun AppNavigation(viewModel: ProductoViewModel){
 
     NavHost(
         navController = navController,
-        startDestination = "camara"
+        startDestination = "inicio"
     )
     {
         composable("login"){
@@ -35,6 +36,10 @@ fun AppNavigation(viewModel: ProductoViewModel){
 
         composable ("camara"){
             CamaraScreen(navController).camara()
+        }
+
+        composable ("vibrar"){
+            VibracionScreen(navController).BotonVibrar()
         }
 
 

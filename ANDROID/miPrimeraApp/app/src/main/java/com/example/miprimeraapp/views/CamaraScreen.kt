@@ -79,7 +79,7 @@ class CamaraScreen (private val navController: NavHostController? = null){
                     PreviewView(ctx).apply {
                         val cameraProvider = proveedorCamara.get()
                         val vistaPrevia = Preview.Builder().build().also {
-                            it.setSurfaceProvider { this.surfaceProvider }
+                            it.setSurfaceProvider ( this.surfaceProvider )
                         }
 
                         try {
@@ -105,18 +105,15 @@ class CamaraScreen (private val navController: NavHostController? = null){
                         ejecutarCamara,
                         object : ImageCapture.OnImageSavedCallback {
 
-                            override fun guardandoImagen(resultadoSalidaImagen: ImageCapture.OutputFileResults) {
+                            override fun onImageSaved(resultadoSalidaImagen: ImageCapture.OutputFileResults) {
                                 imagenUri = Uri.fromFile(archivoFoto)
                                 camaraAbierta = false
-                            }
-
-                            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                                TODO("Not yet implemented")
                             }
 
                             override fun onError(exception: ImageCaptureException) {
                                 TODO("Not yet implemented")
                             }
+
 
                         }
 

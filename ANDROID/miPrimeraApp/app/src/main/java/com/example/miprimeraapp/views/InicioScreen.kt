@@ -91,6 +91,20 @@ class InicioScreen(private val navController: NavHostController? = null) {
                             }) {
                                 Text(text = "Gestionar productos")
                             }
+
+                            DropdownMenuItem(onClick = {
+                                navController?.navigate("camara")
+                                expandirMenu = false
+                            }) {
+                                Text(text = "Camara")
+                            }
+
+                            DropdownMenuItem(onClick = {
+                                navController?.navigate("vibrar")
+                                expandirMenu = false
+                            }) {
+                                Text(text = "Vibracion")
+                            }
                         }
                     },
                     actions = {
