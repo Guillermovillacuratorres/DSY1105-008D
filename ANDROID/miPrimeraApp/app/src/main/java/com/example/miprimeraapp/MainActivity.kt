@@ -16,6 +16,8 @@ import com.example.miprimeraapp.storage.ProductoRepository
 import com.example.miprimeraapp.storage.ProductViewModelFactory
 import com.example.miprimeraapp.viewModel.ProductoViewModel
 import com.example.miprimeraapp.ui.theme.MiPrimeraAppTheme
+import com.example.miprimeraapp.viewModel.VehiculoViewModel
+
 class MainActivity : ComponentActivity() {
 
     private val viewModel: ProductoViewModel by viewModels {
@@ -32,6 +34,7 @@ class MainActivity : ComponentActivity() {
             )
         )
     }
+private val vehiculoViewModel: VehiculoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppNavigation(viewModel)
+                    AppNavigation(viewModel,vehiculoViewModel)
                 }
             }
         }

@@ -29,6 +29,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,37 +40,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.example.miprimeraapp.R
 import com.example.miprimeraapp.models.Auto
+import com.example.miprimeraapp.viewModel.VehiculoViewModel
 
-class InicioScreen(private val navController: NavHostController? = null) {
+class InicioScreen(private val navController: NavHostController? = null, private val vehiculoViewModel: VehiculoViewModel) {
+
+    val state = vehiculoViewModel.state
+
     @Composable
     fun inicio(){
+
+        LaunchedEffect(Unit) {vehiculoViewModel.obtenerVehiculos() }
+
+
         var expandirMenu by remember { mutableStateOf(false) }
         var expandirMenuDerecha by remember { mutableStateOf(false) }
 
-        var autos = listOf<Auto>(
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
-            Auto("Honda","Rojo", R.drawable.honda),
 
-
-
-
-        )
         BackHandler {  }
 
 
@@ -105,6 +94,13 @@ class InicioScreen(private val navController: NavHostController? = null) {
                             }) {
                                 Text(text = "Vibracion")
                             }
+
+                            DropdownMenuItem(onClick = {
+                                navController?.navigate("agregarVehiculo")
+                                expandirMenu = false
+                            }) {
+                                Text(text = "Agregar vehiculo")
+                            }
                         }
                     },
                     actions = {
@@ -131,7 +127,7 @@ class InicioScreen(private val navController: NavHostController? = null) {
             Column(modifier = Modifier.padding(innerPadding)) {
                 //Text(text = "Hoooooooolaaa!")
                 LazyColumn {
-                    items(autos) {a ->
+                    items(state.vehiculos) {a ->
                         Card(
                             modifier = Modifier.fillMaxWidth().padding(8.dp),
                             elevation = 4.dp
@@ -140,16 +136,20 @@ class InicioScreen(private val navController: NavHostController? = null) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(8.dp)
                             ){
-                                Image(
-                                    painter = painterResource(id=a.imagen),
-                                    contentDescription = "Imagen auto",
-                                    modifier = Modifier.height(60.dp)
-                                )
+                               AsyncImage(
+                                   model = a.imagenUrl,
+                                   contentDescription = "Imagen de vehiculos",
+                                   modifier = Modifier.height(60.dp),
+                                   error = painterResource(R.drawable.honda)
+
+                               )
+
                                 Spacer(modifier = Modifier.width(16.dp))
 
                                 Column (modifier = Modifier.weight(1f)){
                                     Text(text = "Marca: ${a.marca}")
                                     Text(text = "Color: ${a.color}")
+                                    Text(text = "Cilindrada: ${a.cilindrada}")
                                 }
 
                                 Row{
@@ -188,5 +188,5 @@ class InicioScreen(private val navController: NavHostController? = null) {
 @Preview
 @Composable
 fun verInicio(){
-    InicioScreen().inicio()
+    //InicioScreen().inicio()
 }
