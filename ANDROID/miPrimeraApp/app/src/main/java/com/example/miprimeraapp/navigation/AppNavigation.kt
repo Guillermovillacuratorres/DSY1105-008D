@@ -9,6 +9,7 @@ import com.example.miprimeraapp.viewModel.ProductoViewModel
 import com.example.miprimeraapp.viewModel.VehiculoViewModel
 import com.example.miprimeraapp.views.AgregarVehiculoScreen
 import com.example.miprimeraapp.views.CamaraScreen
+import com.example.miprimeraapp.views.EditarVehiculoScreen
 import com.example.miprimeraapp.views.InicioScreen
 import com.example.miprimeraapp.views.LoginScreen
 import com.example.miprimeraapp.views.ProductoScreen
@@ -48,6 +49,11 @@ fun AppNavigation(viewModel: ProductoViewModel, vehiculoViewModel: VehiculoViewM
             AgregarVehiculoScreen().agregarVehiculo()
         }
 
+        composable ("editarVehiculo/{id}"){backStackEntry ->
+            val idString = backStackEntry.arguments?.getString("id")
+            val id = idString?.toIntOrNull()?:0
+            EditarVehiculoScreen(navController,id).editarVehiculo()
+        }
 
     }
 }

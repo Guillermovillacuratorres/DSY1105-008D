@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.miprimeraapp.models.Vehiculo
 import com.example.miprimeraapp.models.VehiculoAgregar
 import com.example.miprimeraapp.models.VehiculoState
 import com.example.miprimeraapp.repository.VehiculoService
@@ -37,7 +38,9 @@ class VehiculoViewModel : ViewModel(){
         state = state.copy(imagenUrl = nuevaImagenUrl)
     }
 
-
+    fun cambiarId(nuevaId:Int){
+        state = state.copy(id = nuevaId)
+    }
 
     fun obtenerVehiculos(){
         viewModelScope.launch {
@@ -85,4 +88,61 @@ class VehiculoViewModel : ViewModel(){
             }
         }
     }
+
+
+    fun buscarAuto(vehiculoId:Int){
+        viewModelScope.launch {
+            try {
+                val vehiculoEncontrado = vehiculoService.buscarVehiculo(vehiculoId)
+                cambiarMarca(vehiculoEncontrado.marca)
+                cambiarColor(vehiculoEncontrado.color)
+                cambiarModelo(vehiculoEncontrado.modelo)
+                cambiarCilindrada(vehiculoEncontrado.cilindrada.toString())
+                cambiarImagen(vehiculoEncontrado.imagenUrl)
+                cambiarId(vehiculoEncontrado.id)
+            }catch (e: Exception){
+
+            }
+        }
+    }
+
+
+
+
+    fun actualizarVehiculo(auto: Vehiculo){
+        state = state.copy(
+            marca = auto.marca,
+            modelo = auto.modelo,
+            color = auto.color,
+            cilindrada = auto.cilindrada.toString(),
+            imagenUrl = auto.imagenUrl
+        )
+
+        viewModelScope.launch {
+            try {
+                vehiculoService.actualizarVehiculo(auto)
+            }catch (e: Exception){
+
+            }
+        }
+
+    }
+
+
+
+    fun eliminarVehiculo(vehiculoId:Int){
+        viewModelScope.launch {
+            try {
+                if(vehiculoId != null){
+                    vehiculoService.eliminarVehiculo(vehiculoId)
+                }
+                obtenerVehiculos()
+            }catch (e: Exception){
+
+            }
+        }
+    }
+
+
+
 }

@@ -153,11 +153,11 @@ class InicioScreen(private val navController: NavHostController? = null, private
                                 }
 
                                 Row{
-                                    IconButton(onClick = {}) {
+                                    IconButton(onClick = {navController?.navigate("editarVehiculo/" + a.id )}) {
                                         Icon(Icons.Default.Edit,
                                             contentDescription = "Editar")
                                     }
-                                    IconButton(onClick = {}) {
+                                    IconButton(onClick = {vehiculoViewModel.eliminarVehiculo(a.id)}) {
                                         Icon(Icons.Default.Delete,
                                             contentDescription = "Eliminar")
                                     }
